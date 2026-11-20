@@ -33,3 +33,7 @@
     flex: 1 1 auto;
     aspect-ratio: 1 / 1;
 }
+
+.grid__cell--selected {
+    border: 3px solid black;
+}
