@@ -1,0 +1,35 @@
+:root {
+    
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrap {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: auto;
+    align-content: center;
+}
+
+.grid {
+    margin: auto;
+    width: 400px;
+}
+
+.grid__row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    column-gap: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.grid__cell {
+    border: 1px solid grey;
+    flex: 1 1 auto;
+    aspect-ratio: 1 / 1;
+}
