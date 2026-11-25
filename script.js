@@ -9,6 +9,9 @@ let currentGuess = "";
 
 let guessContainers = document.querySelectorAll(".grid__row");
 
+// Set first letter to be selected by default
+toggleCurrentCellSelectionDisplay();
+
 addEventListener("keydown", (event) => {
   keypressEventHandler(event);
 });
@@ -17,7 +20,7 @@ function isGuessValid(guess) {
   return Boolean(guess.match(/[a-z]{GUESS_LENGTH}/i));
 }
 
-function checkGuess() {
+function correctGuess() {
   console.log("@@@ checking guess");
 }
 
@@ -29,36 +32,39 @@ function toggleCurrentCellSelectionDisplay() {
 }
 
 function keypressEventHandler(event) {
-  // Submit guess
-  if (event.key == "Enter") {
-    if (isGuessValid()) {
-      currentRow++;
-      checkGuess();
-    }
-  }
+  switch (event.key) {
 
-  // Delete letter
-  else if (event.key == "Backspace" && currentColumnIndex - 1 >= 0) {
-    toggleCurrentCellSelectionDisplay();
-    currentColumnIndex--;
-    toggleCurrentCellSelectionDisplay();
-  }
+    // Submit text
+    case "Enter":
+      if (!isGuessValid()) return;
+      currentRowIndex++;
+      currentColumnIndex = 0;
+      correctGuess();
+      break;
 
-  // Add letter
-  else {
-    console.log(`@@@ current column index = ${currentColumnIndex}`);
-
-    if (event.key.match(VALID_LETTERS_INPUT_KEYS) && currentColumnIndex + 1 < GUESS_LENGTH) {
-      console.log(
-        `@@@ guess contains [${currentRowIndex}] = ${guessContainers[currentRowIndex]}`,
-      );
+    // Delete letter
+    case "Backspace":
+      if (currentColumnIndex - 1 < 0) return;
+      console.log('delet');
       toggleCurrentCellSelectionDisplay();
-      currentColumnIndex++;
+      currentColumnIndex--;
       toggleCurrentCellSelectionDisplay();
-    } else {
-      console.log(`@@@ input key ${event.key} is invalid or index too high`);
-    }
+      break;
+
+    // Add letter
+    default:
+      console.log(`@@@ current column index = ${currentColumnIndex}`);
+    
+      if (event.key.match(VALID_LETTERS_INPUT_KEYS) && currentColumnIndex + 1 < GUESS_LENGTH) {
+        console.log(`@@@ pressed key: ${event.key}`);
+        console.log(
+          `@@@ guess contains [${currentRowIndex}] = ${guessContainers[currentRowIndex]}`,
+        );
+        toggleCurrentCellSelectionDisplay();
+        currentColumnIndex++;
+        toggleCurrentCellSelectionDisplay();
+      } else {
+        console.log(`@@@ input key ${event.key} is invalid or index too high`);
+      }
   }
 }
-
-toggleCurrentCellSelectionDisplay();
