@@ -24,10 +24,13 @@ function correctGuess() {
   console.log("@@@ checking guess");
 }
 
+function getSelectedCell() {
+  return document.getElementById(`${currentRowIndex}${currentColumnIndex}`);
+}
+
 // Updates cell selection display on input
 function toggleCurrentCellSelectionDisplay() {
-  document
-    .getElementById(`${currentRowIndex}${currentColumnIndex}`)
+    getSelectedCell()
     .classList.toggle("grid__cell--selected");
 }
 
@@ -54,8 +57,9 @@ function keypressEventHandler(event) {
     // Add letter
     default:
       console.log(`@@@ current column index = ${currentColumnIndex}`);
-    
-      if (event.key.match(VALID_LETTERS_INPUT_KEYS) && currentColumnIndex + 1 < GUESS_LENGTH) {
+      getSelectedCell().innerHTML = event.key;
+
+      if (event.key.match(VALID_LETTERS_INPUT_KEYS) && event.key.length === 1 && currentColumnIndex + 1 < GUESS_LENGTH) {
         console.log(`@@@ pressed key: ${event.key}`);
         console.log(
           `@@@ guess contains [${currentRowIndex}] = ${guessContainers[currentRowIndex]}`,

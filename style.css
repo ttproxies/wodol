@@ -48,6 +48,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* -- DESIGN -- */
 
+a {
+    text-decoration: none;
+}
+
 .game-title {
     color: var(--COLOR-TEXT);
     line-height: 85%;
@@ -78,10 +82,6 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--COLOR-ACCENT-PRIMARY);
 }
 
-a {
-    text-decoration: none;
-}
-
 /* -- GUESS GRID -- */
 
 .grid {
@@ -98,10 +98,15 @@ a {
 }
 
 .grid__cell {
-    flex: 0 1 75px;
+    display: grid;
+    align-content: center;
+    font-size: 4rem;
+    flex: 0 0 75px;
     aspect-ratio: 1 / 1;
     background-color: var(--COLOR-SECONDARY);
     border-radius: 0.75rem;
+    padding: 0.7rem;
+    overflow: hidden;
 }
 
 .grid__cell--selected {
