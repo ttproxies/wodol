@@ -21,15 +21,11 @@ function checkGuess() {
   console.log("@@@ checking guess");
 }
 
-function updateSelectedCell() {
+// Updates cell selection display on input
+function toggleCurrentCellSelectionDisplay() {
   document
     .getElementById(`${currentRowIndex}${currentColumnIndex}`)
     .classList.toggle("grid__cell--selected");
-  if (currentColumnIndex - 1 >= 0) {
-    document
-      .getElementById(`${currentRowIndex}${currentColumnIndex-1}`)
-      .classList.toggle("grid__cell--selected");
-  }
 }
 
 function keypressEventHandler(event) {
@@ -39,24 +35,25 @@ function keypressEventHandler(event) {
       currentRow++;
       checkGuess();
     }
-  }
-
-  else if (event.key == "Backspace") {
-    updateSelectedCell();
+  } else if (event.key == "Backspace" && currentColumnIndex - 1 >= 0) {
+    toggleCurrentCellSelectionDisplay();
     currentColumnIndex--;
+    toggleCurrentCellSelectionDisplay();
   }
 
   // Add letter
   else {
-    if (VALID_LETTERS_INPUT_KEYS.includes(event.key)) {
+    if (VALID_LETTERS_INPUT_KEYS.includes(event.key) && currentColumnIndex + 1 < GUESS_LENGTH) {
       console.log(
-        `@@@ guess containers [${currentRowIndex}] = ${guessContainers[currentRowIndex]}`,
+        `@@@ guess contains [${currentRowIndex}] = ${guessContainers[currentRowIndex]}`,
       );
-      updateSelectedCell();
+      toggleCurrentCellSelectionDisplay();
       currentColumnIndex++;
-
+      toggleCurrentCellSelectionDisplay();
     } else {
-      console.log(`@@@ input key ${event.key} is invalid`);
+      console.log(`@@@ input key ${event.key} is invalid or index too high`);
     }
   }
 }
+
+toggleCurrentCellSelectionDisplay();
