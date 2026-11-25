@@ -1,6 +1,6 @@
 const MAX_GUESSES = 6;
 const GUESS_LENGTH = 5;
-const VALID_LETTERS_INPUT_KEYS = "abcdefghijklmnopqrstuvwxyz";
+const VALID_LETTERS_INPUT_KEYS = /[a-z]/i;
 
 let currentRowIndex = 0;
 let currentColumnIndex = 0;
@@ -35,7 +35,10 @@ function keypressEventHandler(event) {
       currentRow++;
       checkGuess();
     }
-  } else if (event.key == "Backspace" && currentColumnIndex - 1 >= 0) {
+  }
+
+  // Delete letter
+  else if (event.key == "Backspace" && currentColumnIndex - 1 >= 0) {
     toggleCurrentCellSelectionDisplay();
     currentColumnIndex--;
     toggleCurrentCellSelectionDisplay();
@@ -43,7 +46,9 @@ function keypressEventHandler(event) {
 
   // Add letter
   else {
-    if (VALID_LETTERS_INPUT_KEYS.includes(event.key) && currentColumnIndex + 1 < GUESS_LENGTH) {
+    console.log(`@@@ current column index = ${currentColumnIndex}`);
+
+    if (event.key.match(VALID_LETTERS_INPUT_KEYS) && currentColumnIndex + 1 < GUESS_LENGTH) {
       console.log(
         `@@@ guess contains [${currentRowIndex}] = ${guessContainers[currentRowIndex]}`,
       );

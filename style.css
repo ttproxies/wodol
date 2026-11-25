@@ -1,5 +1,11 @@
 :root {
-    --LETTER-CORRECT: green;
+    --COLOR-PRIMARY: #DEDDD5;
+    --COLOR-SECONDARY: #C7C5B7;
+    --COLOR-ACCENT-PRIMARY: #89A8B2;
+    --COLOR-ACCENT-SECONDARY: #B3C8CF;
+
+    --COLOR-TEXT: #414e53;
+    --COLOR-TEXT-LIGHT: var(--COLOR-PRIMARY);
 }
 
 * {
@@ -8,6 +14,13 @@
     padding: 0;
 }
 
+body {
+    text-align: center;
+    background-color: var(--COLOR-PRIMARY);
+}
+
+/* -- UTILITY -- */
+
 .wrap {
     min-height: 100vh;
     display: grid;
@@ -15,9 +28,29 @@
     align-content: center;
 }
 
+/* -- DESIGN -- */
+
+.game-title {
+    color: var(--COLOR-TEXT);
+    font-family: "Oi", serif;
+    line-height: 85%;
+    font-weight: 400;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.game-title__dot {
+    display: inline-block;
+    margin-inline: 0.5rem;
+    color: var(--COLOR-ACCENT-PRIMARY);
+    font-size: 5rem;
+}
+
+/* -- GUESS GRID -- */
+
 .grid {
     margin: auto;
-    width: 400px;
+    width: 100%;
 }
 
 .grid__row {
@@ -30,8 +63,9 @@
 
 .grid__cell {
     border: 1px solid grey;
-    flex: 1 1 auto;
+    flex: 0 1 75px;
     aspect-ratio: 1 / 1;
+    background-color: var(--COLOR-SECONDARY);
 }
 
 .grid__cell--selected {
