@@ -3,7 +3,7 @@ const GUESS_LENGTH = 5;
 const VALID_LETTERS_INPUT_KEYS = /[a-z]/i;
 
 let currentRowIndex = 0;
-let currentColumnIndex = 0;
+let activeCursorIndex = 0;
 
 /// The most recent submitted guess
 let lastGuess = '';
@@ -23,7 +23,7 @@ function checkGuess() {
 }
 
 function getSelectedCell() {
-  return document.getElementById(`${currentRowIndex}${currentColumnIndex}`);
+  return document.getElementById(`${currentRowIndex}${activeCursorIndex}`);
 }
 
 // Updates cell selection display on input
@@ -43,15 +43,14 @@ function keypressEventHandler(event) {
     case "Enter":
       if (!isGuessValid()) return;
       currentRowIndex++;
-      currentColumnIndex = 0;
+      activeCursorIndex = 0;
       correctGuess();
       break;
 
     // Delete letter
     case "Backspace":
+      if (activeCursorIndex > 0) activeCursorIndex--;
       popLetter();
-
-      if (currentColumnIndex > 0) currentColumnIndex--;
       break;
 
     // Add letter
@@ -59,7 +58,7 @@ function keypressEventHandler(event) {
       if (event.key.match(VALID_LETTERS_INPUT_KEYS) && event.key.length === 1) {
         pushLetter(event.key);
 
-        if (currentColumnIndex < GUESS_LENGTH - 1) currentColumnIndex++;
+        if (activeCursorIndex < GUESS_LENGTH) activeCursorIndex++; // Cursor can be after last letter
     }
   }
 }
