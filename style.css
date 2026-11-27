@@ -1,5 +1,6 @@
 :root {
     --COLOR-PRIMARY: #DEDDD5;
+    --COLOR-SECONDARY-LIGHT: #D3D1C3;
     --COLOR-SECONDARY: #C7C5B7;
     --COLOR-TERTIARY-LIGHT: #B8B5A9;
     --COLOR-TERTIARY: #99978C;
@@ -100,15 +101,21 @@ a {
 .grid__cell {
     display: grid;
     align-content: center;
-    
+
     flex: 0 0 75px;
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    
-    background-color: var(--COLOR-SECONDARY);
+
+    background-color: var(--COLOR-SECONDARY-LIGHT);
     font-size: 3rem;
     border-radius: 0.75rem;
     padding: 0.7rem;
+
+    user-select: none;
+}
+
+.grid__cell--filled {
+    background-color: var(--COLOR-SECONDARY);
 }
 
 .grid__cell--selected {
