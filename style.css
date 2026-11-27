@@ -100,13 +100,15 @@ a {
 .grid__cell {
     display: grid;
     align-content: center;
-    font-size: 4rem;
+    
     flex: 0 0 75px;
     aspect-ratio: 1 / 1;
+    overflow: hidden;
+    
     background-color: var(--COLOR-SECONDARY);
+    font-size: 3rem;
     border-radius: 0.75rem;
     padding: 0.7rem;
-    overflow: hidden;
 }
 
 .grid__cell--selected {

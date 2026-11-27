@@ -48,7 +48,7 @@ function keypressEventHandler(event) {
     // Delete letter
     case "Backspace":
       if (currentColumnIndex - 1 < 0) return;
-      console.log('delet');
+      getSelectedCell().innerHTML = '';
       toggleCurrentCellSelectionDisplay();
       currentColumnIndex--;
       toggleCurrentCellSelectionDisplay();
